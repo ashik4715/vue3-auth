@@ -1,0 +1,81 @@
+h1 {
+  @apply text-6xl font-bold underline;
+}
+
+h2 {
+  @apply text-5xl font-bold underline;
+}
+
+h3 {
+  @apply text-4xl font-bold underline;
+}
+
+h4 {
+  @apply text-3xl font-bold underline;
+}
+
+h5 {
+  @apply text-2xl font-bold underline;
+}
+
+h6 {
+  @apply text-xl font-bold underline;
+}
+html.dark {
+  color-scheme: dark;
+}
+body {
+  @apply bg-slate-50 text-slate-800 dark:bg-slate-800 dark:text-slate-50;
+
+  margin: 0;
+  font-family: "Prompt", sans-serif;
+  color: white;
+}
+section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 400px;
+  padding: 100px 20vw;
+  flex-wrap: nowrap;
+}
+.blue {
+  background: #3c31dd;
+}
+.red {
+  background: #dd3f31;
+}
+.pink {
+  background: #ff0066;
+}
+.dark {
+  background: #202731;
+}
+.curve {
+  position: absolute;
+  height: 225px;
+  width: 100%;
+  bottom: 0;
+}
+.curve::before {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 100% 50%;
+  width: 55%;
+  height: 100%;
+  background-color: #202731;
+  transform: translate(85%, 60%);
+}
+.curve::after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 100% 50%;
+  width: 55%;
+  height: 100%;
+  background-color: #3c31dd;
+  transform: translate(-4%, 40%);
+  z-index: -1;
+}

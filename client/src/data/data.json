@@ -1,0 +1,31 @@
+{
+  "destinations": [
+    {
+      "name": "Intelligent Infrastructure",
+      "slug": "intelligent-infrastructure",
+      "image": "networkrail.jpeg",
+      "imageSrc": "./public/images/networkrail.jpeg",
+      "id": 1,
+      "description": "I worked as an Assistant Project Manager at Network Rail UK as part of the Intelligent Infrastructure project. My role involved supporting the delivery of cutting-edge technologies to improve the performance and efficiency of the railway network. During my time at Network Rail UK, I was responsible for: <ul class='px-3 py-6 list-disc list-inside'><li>Supporting the Project Manager in the delivery of project objectives, including scope, schedule, budget, and quality.</li><li>Contributing to the development of project plans, risk assessments, and other project documentation.</li><li>Coordinating project activities across multiple teams and stakeholders, both internal and external to Network Rail UK.</li><li>Providing regular project status updates to senior management and stakeholders, including progress reports and risk assessments.</li></ul>Through my work at Network Rail UK, I gained valuable experience in project management, stakeholder engagement, and the implementation of innovative technologies in a complex and dynamic environment. I also developed a deep understanding of the challenges and opportunities involved in delivering major infrastructure projects, particularly those related to the transportation sector. This experience has given me a unique perspective on the importance of effective project management and collaboration in delivering successful outcomes for both the organization and the wider community.",
+      "short_description": "Network Rail UK's Intelligent Infrastructure project."
+    },
+    {
+      "name": "M25 Asset & Investment Management",
+      "slug": "m25",
+      "image": "m25.jpeg",
+      "imageSrc": "./public/images/m25.jpeg",
+      "id": 2,
+      "description": "I worked at Connect Plus as part of a team in charge of data, asset, and investment management for the M25 London ring road, which is the busiest and most complex motorway in the UK. As part of my role, I was responsible for: <ul class='px-3 py-6 list-disc list-inside'><li>Ensuring the accuracy and integrity of asset data, including maintenance records, inspections, and condition assessments.</li><li>Collaborating with internal and external stakeholders to identify investment priorities and develop business cases for funding.</li><li>Contributing to the development and implementation of long-term asset management strategies for the M25.</li></ul>During my time at Connect Plus, I gained valuable experience in data analysis, project management, and stakeholder engagement. I also developed a deep understanding of the challenges and complexities involved in managing a critical piece of national infrastructure. This experience has given me a unique perspective on the importance of effective data management and asset maintenance in ensuring the safe and efficient operation of major road networks.",
+      "short_description": "Asset and investment management for the M25 London ring road."
+    },
+    {
+      "name": "Dublin Port & Jack Lynch Tunnel",
+      "slug": "dublin-port-tunnel",
+      "image": "Dublin-Port-Tunnel.jpeg",
+      "imageSrc": "./public/images/Dublin-Port-Tunnel.jpeg",
+      "id": 3,
+      "description": "I am currently working at Dublin Port Tunnel and Jack Lynch Tunnel as part of a team responsible for asset management and data analysis. My role involves leveraging data to improve the performance and safety of these critical pieces of national infrastructure. Specifically, my responsibilities include:<ul class='px-3 py-6 list-disc list-inside'><li>Ensuring the accuracy and integrity of asset data, including maintenance records, inspections, and condition assessments.</li><li>Conducting data analysis to identify trends, areas of concern, and opportunities for improvement.</li><li>Collaborating with internal and external stakeholders to develop and implement maintenance and repair strategies that minimize downtime and maximize asset life.</li><li>Contributing to the development of long-term asset management strategies for the tunnels, including the adoption of new technologies and innovative approaches.</li></ul>Through my work at Dublin Port Tunnel and Jack Lynch Tunnel, I have gained valuable experience in data analysis, asset management, and stakeholder engagement. I have also developed a deep understanding of the importance of effective data management and asset maintenance in ensuring the safe and efficient operation of critical infrastructure. This experience has given me a unique perspective on the challenges and opportunities involved in managing infrastructure assets and leveraging data to support informed decision-making.",
+      "short_description": "Asset management and data analysis for Dublin Port Tunnel and Jack Lynch Tunnel."
+    }
+  ]
+}
