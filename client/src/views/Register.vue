@@ -126,14 +126,10 @@ export default {
           password: this.password,
         })
         .then((response) => {
-          // registration successful, store the token in localStorage
-          // localStorage.setItem("token", response.data.token);
-
           // Redirect to the dashboard
           this.$router.push("/dashboard");
         })
         .catch((error) => {
-          // Login failed, handle the error
           console.error("Registration failed:", error);
         });
     },

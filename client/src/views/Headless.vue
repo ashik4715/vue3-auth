@@ -152,11 +152,25 @@
     </header>
   </div>
 
-  <div class="md:container-lg md:mx-auto bg-no-repeat">
+  <div class="bg-no-repeat">
     <div v-if="false">
       <HelloWorld />
     </div>
-    <div v-else><router-view></router-view></div>
+    <div v-else-if="showDashboard">
+      <Sidebar />
+    </div>
+    <div v-else-if="showUsers">
+      <Sidebar />
+    </div>
+    <div v-else-if="showAddHome">
+      <Sidebar />
+    </div>
+    <div v-else-if="showAllHome">
+      <Sidebar />
+    </div>
+    <div v-else>
+      <router-view></router-view>
+    </div>
   </div>
   <!-- footer -->
   <footer class="p-1 flex justify-between">
@@ -271,6 +285,7 @@
 <script>
 import { ref } from "vue";
 import HelloWorld from "@src/components/HelloWorld.vue";
+import Sidebar from "@src/components/Sidebar.vue";
 import { Dialog, DialogPanel } from "@headlessui/vue";
 import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
 import { useDark } from "@vueuse/core";
@@ -314,6 +329,25 @@ export default {
 };
 </script>
 <script setup>
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+
+const showDashboard = computed(() => {
+  const route = useRoute();
+  return route.name === "Dashboard";
+});
+const showUsers = computed(() => {
+  const route = useRoute();
+  return route.name === "Users";
+});
+const showAddHome = computed(() => {
+  const route = useRoute();
+  return route.name === "AddHome";
+});
+const showAllHome = computed(() => {
+  const route = useRoute();
+  return route.name === "AllHome";
+});
 const isDark = useDark();
 const toggleDark = () => {
   isDark.value = !isDark.value;

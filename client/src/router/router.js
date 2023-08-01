@@ -61,6 +61,21 @@ const routes = [
     name: "Dashboard",
     component: () => import("@views/Dashboard.vue"),
   },
+  {
+    path: "/users",
+    name: "Users",
+    component: () => import("@views/Users.vue"),
+  },
+  {
+    path: "/add-home-meta",
+    name: "AddHome",
+    component: () => import("@views/Meta/AddHome.vue"),
+  },
+  {
+    path: "/all-home-meta",
+    name: "AllHome",
+    component: () => import("@views/Meta/AllHome.vue"),
+  },
 ];
 const router = createRouter({
   history: createWebHistory(),
