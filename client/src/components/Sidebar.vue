@@ -596,6 +596,15 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  name: "Sidebar",
+  methods: {
+    logout() {
+      localStorage.removeItem("token");
+
+      this.$router.push("/login");
+    },
+  },
+};
 </script>
 <style lang=""></style>

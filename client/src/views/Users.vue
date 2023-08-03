@@ -106,7 +106,9 @@
                   <td
                     class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
                   >
-                    <p class="text-gray-900 whitespace-no-wrap">Jan 01, 2020</p>
+                    <p class="text-gray-900 whitespace-no-wrap">
+                      {{ formatCreatedAt(user.created_at) }}
+                    </p>
                   </td>
                   <td
                     class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
@@ -153,12 +155,6 @@
 import { useHead } from "unhead";
 import axios from "axios";
 
-const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000", // Replace with your API base URL
-  headers: {
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-  },
-});
 export default {
   name: "Users",
   data() {
@@ -172,7 +168,7 @@ export default {
   methods: {
     fetchUsers() {
       axios
-        .get("http://localhost:3000/users", {
+        .get("http://localhost:8000/api/users", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -182,47 +178,34 @@ export default {
         })
         .catch((error) => {
           console.error("Error fetching users:", error);
+          this.$router.push("/login");
         });
     },
     logout() {
-      // Clear the token from localStorage
       localStorage.removeItem("token");
 
-      // Redirect to the login page
       this.$router.push("/login");
     },
     deleteUser(userId) {
       axios
-        .delete(`http://localhost:3000/register/${userId}`)
+        .delete(`http://localhost:8000/register/${userId}`)
         .then((response) => {
           console.log(response.data.message);
           this.users = this.users.filter((user) => user.id !== userId);
         })
         .catch((error) => {
           console.error("Error deleting user from client:", error);
-          // Handle error scenarios
         });
     },
-  },
-  beforeRouteEnter(to, from, next) {
-    const token = localStorage.getItem("token");
+    formatCreatedAt(created_at) {
+      const dateObject = new Date(created_at);
 
-    if (!token) {
-      // Token is not present, redirect to the login page
-      next("/login");
-    } else {
-      // Token is present, verify it on the server
-      axiosInstance
-        .get("/verify-token")
-        .then(() => {
-          // Token is valid, allow access to the route
-          next();
-        })
-        .catch(() => {
-          // Token is invalid, redirect to the login page
-          next("/login");
-        });
-    }
+      const day = dateObject.getDate();
+      const month = dateObject.toLocaleString("default", { month: "long" });
+      const year = dateObject.getFullYear();
+
+      return `${day} ${month} ${year}`;
+    },
   },
 
   setup() {
@@ -248,4 +231,3 @@ export default {
   },
 };
 </script>
-<style scoped></style>

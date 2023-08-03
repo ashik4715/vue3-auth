@@ -50,7 +50,7 @@ import { useHead } from "unhead";
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "http://localhost:8000",
   headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}`,
   },
@@ -68,80 +68,41 @@ export default {
   methods: {
     fetchUsers() {
       axios
-        .get("http://localhost:3000/users", {
+        .get("http://localhost:8000/api/user", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         })
         .then((response) => {
           this.users = response.data;
+          useHead({
+            title: `Dashboard | Olema Chand ${this.users.name}`,
+            meta: [
+              {
+                name: "title",
+                content: `Dashboard | Olema Chand ${this.users.name}`,
+              },
+              {
+                name: "description",
+                content: `Dashboard of Olema Chand 's Portfolio. Total users: ${this.users.name}`,
+              },
+              {
+                property: "og:description",
+                content: `Dashboard of Olema Chand 's Portfolio. Total users: ${this.users.name}`,
+              },
+            ],
+          });
         })
         .catch((error) => {
           console.error("Error fetching users:", error);
+          this.$router.push("/login");
         });
     },
     logout() {
-      // Clear the token from localStorage
       localStorage.removeItem("token");
 
-      // Redirect to the login page
       this.$router.push("/login");
     },
-    deleteUser(userId) {
-      axios
-        .delete(`http://localhost:3000/register/${userId}`)
-        .then((response) => {
-          console.log(response.data.message);
-          this.users = this.users.filter((user) => user.id !== userId);
-        })
-        .catch((error) => {
-          console.error("Error deleting user from client:", error);
-          // Handle error scenarios
-        });
-    },
-  },
-  beforeRouteEnter(to, from, next) {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      // Token is not present, redirect to the login page
-      next("/login");
-    } else {
-      // Token is present, verify it on the server
-      axiosInstance
-        .get("/verify-token")
-        .then(() => {
-          // Token is valid, allow access to the route
-          next();
-        })
-        .catch(() => {
-          // Token is invalid, redirect to the login page
-          next("/login");
-        });
-    }
-  },
-
-  setup() {
-    useHead({
-      title: "DashBoard | Olema Chand ",
-      meta: [
-        {
-          name: "title",
-          content: "DashBoard | Olema Chand ",
-        },
-        {
-          name: "description",
-          content: "DashBoard Page of Olema Chand 's Portfolio.",
-        },
-        {
-          property: "og:description",
-          content: "DashBoard Page of Olema Chand 's Portfolio.",
-        },
-        { property: "og:image", content: `summary_large_image` },
-        { name: "twitter:card", content: `summary_large_image` },
-      ],
-    });
   },
 };
 </script>
-<style scoped></style>

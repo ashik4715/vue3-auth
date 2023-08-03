@@ -40,7 +40,59 @@
   </div>
 </template>
 <script>
+import { useHead } from "unhead";
+import axios from "axios";
+
 export default {
   name: "HelloWorld",
+  data() {
+    return {
+      meta_tags: [],
+    };
+  },
+  mounted() {
+    this.fetchUsers();
+  },
+  methods: {
+    fetchUsers() {
+      axios
+        .get("http://localhost:8000/api/client-home", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((response) => {
+          this.meta_tags = response.data;
+          useHead({
+            title: `${this.meta_tags[0].meta_title}`, // Update title
+            meta: [
+              {
+                name: "title",
+                content: `${this.meta_tags[0].meta_title}`,
+              },
+              {
+                name: "description",
+                content: `${this.meta_tags[0].meta_description}`,
+              },
+              {
+                property: "og:description",
+                content: `${this.meta_tags[0].meta_description}`,
+              },
+              {
+                property: "og:image",
+                content: `images/${this.meta_tags[0].summary_large_image}`,
+              },
+              {
+                name: "twitter:card",
+                content: `images/${this.meta_tags[0].summary_large_image}`,
+              },
+            ],
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching users:", error);
+        });
+    },
+  },
 };
 </script>

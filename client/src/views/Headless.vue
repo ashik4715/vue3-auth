@@ -3,13 +3,13 @@
     <header class="absolute inset-x-0 top-0 z-50 w-full">
       <nav
         :class="{ scrolled: !view.atTopOfPage }"
-        class="fixed flex w-full items-center bg-gray-100 dark:bg-gray-800 justify-between flex-wrap m-auto top-0 animated shadow-2xl shadow-cyan-400/20 p-8 lg:px-8"
+        class="fixed flex w-full items-center bg-gray-100 dark:bg-gray-800 justify-between flex-wrap m-auto top-0 animated shadow-2xl shadow-cyan-400/20 p-5 lg:px-5"
         aria-label="Global"
       >
         <div class="flex lg:flex-1">
-          <a href="/" class="-m-1.5 p-1.5">
-            <!-- <img class="h-8 w-auto" src="#" alt="logo" /> -->
-          </a>
+          <router-link to="/" class="-m-1.5 p-1.5">
+            <img class="h-12 w-auto" src="/logo-webp.webp" alt="logo" />
+          </router-link>
         </div>
         <div class="flex lg:hidden">
           <button

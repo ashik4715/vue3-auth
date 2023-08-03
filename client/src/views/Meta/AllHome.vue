@@ -123,7 +123,7 @@
                     <div class="flex-shrink-0 w-10 h-10">
                       <img
                         class="w-full h-full rounded-full"
-                        :src="`/meta_images/${user.summary_large_image}`"
+                        :src="`/images/${user.summary_large_image}`"
                         alt="meta-photo"
                       />
                     </div>
@@ -133,7 +133,7 @@
                     class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
                   >
                     <p class="text-gray-900 whitespace-no-wrap">
-                      {{ user.created_at }}
+                      {{ formatCreatedAt(user.created_at) }}
                     </p>
                   </td>
                   <td
@@ -187,12 +187,6 @@
 import { useHead } from "unhead";
 import axios from "axios";
 
-const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000", // Replace with your API base URL
-  headers: {
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-  },
-});
 export default {
   name: "AllHome",
   data() {
@@ -206,7 +200,7 @@ export default {
   methods: {
     fetchUsers() {
       axios
-        .get("http://localhost:3000/all-home", {
+        .get("http://localhost:8000/api/meta-home", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -216,6 +210,7 @@ export default {
         })
         .catch((error) => {
           console.error("Error fetching users:", error);
+          this.$router.push("/login");
         });
     },
     logout() {
@@ -224,7 +219,11 @@ export default {
     },
     deleteUser(userId) {
       axios
-        .delete(`http://localhost:3000/meta-home/${userId}`)
+        .delete(`http://localhost:8000/api/meta-home/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
         .then((response) => {
           console.log(response.data.message);
           this.users = this.users.filter((user) => user.id !== userId);
@@ -233,26 +232,15 @@ export default {
           console.error("Error deleting user from client:", error);
         });
     },
-  },
-  beforeRouteEnter(to, from, next) {
-    const token = localStorage.getItem("token");
+    formatCreatedAt(created_at) {
+      const dateObject = new Date(created_at);
 
-    if (!token) {
-      // Token is not present, redirect to the login page
-      next("/login");
-    } else {
-      // Token is present, verify it on the server
-      axiosInstance
-        .get("/verify-token")
-        .then(() => {
-          // Token is valid, allow access to the route
-          next();
-        })
-        .catch(() => {
-          // Token is invalid, redirect to the login page
-          next("/login");
-        });
-    }
+      const day = dateObject.getDate();
+      const month = dateObject.toLocaleString("default", { month: "long" });
+      const year = dateObject.getFullYear();
+
+      return `${day} ${month} ${year}`;
+    },
   },
 
   setup() {

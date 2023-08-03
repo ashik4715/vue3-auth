@@ -16,7 +16,7 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" @submit.prevent="registration" method="POST">
+      <form class="space-y-6" @submit.prevent="register" method="POST">
         <div>
           <label
             for="name"
@@ -118,20 +118,18 @@ export default {
     };
   },
   methods: {
-    registration() {
-      axios
-        .post("http://localhost:3000/register", {
+    async register() {
+      try {
+        await axios.post("http://localhost:8000/api/register", {
           name: this.name,
           email: this.email,
           password: this.password,
-        })
-        .then((response) => {
-          // Redirect to the dashboard
-          this.$router.push("/dashboard");
-        })
-        .catch((error) => {
-          console.error("Registration failed:", error);
         });
+        this.$router.push("/dashboard");
+        // Store the token in local storage and route to dash board
+      } catch (error) {
+        console.error("Registration error:", error);
+      }
     },
   },
   setup() {

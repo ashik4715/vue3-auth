@@ -99,23 +99,19 @@ export default {
     };
   },
   methods: {
-    login() {
-      axios
-        .post("http://localhost:3000/login", {
+    async login() {
+      try {
+        const response = await axios.post("http://localhost:8000/api/login", {
           email: this.email,
           password: this.password,
-        })
-        .then((response) => {
-          // Login successful, store the token in localStorage
-          localStorage.setItem("token", response.data.token);
-
-          // Redirect to the dashboard
-          this.$router.push("/dashboard");
-        })
-        .catch((error) => {
-          // Login failed, handle the error
-          console.error("Login failed:", error);
         });
+
+        const token = response.data.token;
+        localStorage.setItem("token", token);
+        this.$router.push("/dashboard");
+      } catch (error) {
+        console.error("Login error:", error);
+      }
     },
   },
   setup() {

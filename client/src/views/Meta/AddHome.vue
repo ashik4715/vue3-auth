@@ -38,8 +38,11 @@
         <div
           class="flex h-full items-center justify-center bg-white text-center font-bold shadow-md rounded"
         >
-          <!-- Content goes here -->
-          <!-- <form class="space-y-6" @submit.prevent="homeSubmit" method="POST">
+          <form
+            class="space-y-6"
+            @submit.prevent="submitForm"
+            enctype="multipart/form-data"
+          >
             <div>
               <label
                 for="meta_title"
@@ -59,7 +62,7 @@
             </div>
             <div>
               <label
-                for="meta_description"
+                for="metaDescription"
                 class="block text-sm font-medium leading-6 text-gray-900"
                 >Meta Description</label
               >
@@ -78,108 +81,23 @@
                 </p>
               </div>
             </div>
-
-            <div class="">
-              <label
-                for="cover-photo"
-                class="block text-sm font-medium leading-6 text-gray-900"
-                >Cover photo</label
-              >
-              <div
-                class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10"
-              >
-                <div class="text-center">
-                  <svg
-                    class="mx-auto h-12 w-12 text-gray-300"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                    <label
-                      for="file-upload"
-                      class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                    >
-                      <span>Upload a file</span>
-                      <input
-                        id="file-upload"
-                        name="file-upload"
-                        type="file"
-                        class="sr-only"
-                        @change="handleFileUpload"
-                        required
-                      />
-                    </label>
-                    <p class="pl-1">or drag and drop</p>
-                  </div>
-                  <p class="text-xs leading-5 text-gray-600">
-                    PNG, JPG, GIF up to 10MB
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                class="flex w-full justify-center rounded-md bg-indigo-600 px-3 p-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Add Homepage Meta
-              </button>
-            </div>
-          </form> -->
-          <!-- end Content goes here -->
-
-          <!-- new form -->
-          <form
-            class="space-y-6"
-            @submit.prevent="submitForm"
-            enctype="multipart/form-data"
-          >
             <div>
               <label
-                for="metaTitle"
+                for="meta_keywords"
                 class="block text-sm font-medium leading-6 text-gray-900"
-                >Meta Title</label
+                >Meta Keywords</label
               >
               <div class="mt-2">
                 <input
-                  id="metaTitle"
-                  v-model="metaTitle"
+                  id="meta_keywords"
+                  v-model="meta_keywords"
                   type="text"
-                  placeholder="Enter Meta Title"
+                  placeholder="Enter Meta Keywords"
                   class="block w-full rounded-md border-0 p-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   required
                 />
               </div>
             </div>
-            <div>
-              <label
-                for="metaDescription"
-                class="block text-sm font-medium leading-6 text-gray-900"
-                >Meta Description</label
-              >
-              <div class="mt-2">
-                <textarea
-                  rows="4"
-                  name="metaDescription"
-                  id="metaDescription"
-                  v-model="metaDescription"
-                  placeholder="Enter Meta Description"
-                  class="block w-full rounded-md border-0 p-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  required
-                ></textarea>
-                <p class="mt-3 text-sm leading-6 text-gray-600">
-                  Write a few sentences about Homepage Meta Description.
-                </p>
-              </div>
-            </div>
             <div class="">
               <label
                 for="cover-photo"
@@ -204,16 +122,17 @@
                   </svg>
                   <div class="mt-4 flex text-sm leading-6 text-gray-600">
                     <label
-                      for="summaryLargeImage"
+                      for="summary_large_image"
                       class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                     >
                       <span>Upload a file</span>
                       <input
-                        id="summaryLargeImage"
-                        name="summaryLargeImage"
+                        id="summary_large_image"
+                        name="summary_large_image"
                         type="file"
                         class="sr-only"
-                        @change="handleFileUpload"
+                        ref="imageInput"
+                        @change="handleImageChange"
                         accept="image/*"
                         required
                       />
@@ -246,70 +165,56 @@
 <script>
 import { useHead } from "unhead";
 import axios from "axios";
-
+import { useRouter } from "vue-router";
 export default {
   name: "AddHome",
   data() {
     return {
       meta_title: "",
       meta_description: "",
+      meta_keywords: "",
       summary_large_image: null,
-      metaTitle: "",
-      metaDescription: "",
-      summaryLargeImage: null,
     };
   },
   methods: {
-    handleFileUpload(event) {
+    handleImageChange(event) {
       this.summary_large_image = event.target.files[0];
     },
-    homeSubmit() {
-      const formData = new FormData();
-      formData.append("image", this.summary_large_image);
+    async submitForm(event) {
+      event.preventDefault();
 
-      axios
-        .post("http://localhost:3000/add-home", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          params: {
-            meta_title: this.meta_title,
-            meta_description: this.meta_description,
-          },
-        })
-        .then((response) => {
-          this.$router.push("/all-home-meta");
-        })
-        .catch((error) => {
-          console.error("Homepage Meta failed:", error);
-        });
-    },
-    handleFileUpload(event) {
-      this.summaryLargeImage = event.target.files[0];
-    },
-    submitForm() {
       const formData = new FormData();
-      formData.append("meta_title", this.metaTitle);
-      formData.append("meta_description", this.metaDescription);
-      formData.append("summary_large_image", this.summaryLargeImage);
+      formData.append("meta_title", this.meta_title);
+      formData.append("meta_description", this.meta_description);
+      formData.append("meta_keywords", this.meta_keywords);
+      formData.append("summary_large_image", this.summary_large_image);
 
-      axios
-        .post("http://localhost:3000/meta-home", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-          this.$router.push("/all-home-meta");
-        })
-        .catch((error) => {
-          console.error(error);
-          alert("Error submitting form by submitting");
-        });
+      try {
+        const response = await axios.post(
+          "http://localhost:8000/api/meta-home",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        console.log("Response:", response.data);
+        this.$router.push("/all-home-meta");
+      } catch (error) {
+        console.error("Meta Not Added:", error);
+        this.$router.push("/login");
+      }
     },
   },
   setup() {
+    const router = useRouter();
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/login"); // Use router for navigation
+    }
+
     useHead({
       title: "Add Homepage Meta Page",
       meta: [
